@@ -3,14 +3,13 @@
 import json
 from datetime import datetime, timezone, timedelta
 from app.database.session import get_db, init_db
-from app.models.entities import Tenant, User, Agent, MCPTool, ProtectedResource, Policy, DelegationGrant
+from app.models.entities import Tenant, User, Agent, MCPTool, ProtectedResource, Policy, DelegationGrant, AuditEvent
 from app.core.security import security_engine
 
 def seed_database(force: bool = False):
     init_db()
     with get_db() as db:
         if force:
-            from app.models.entities import AuditEvent, DelegationGrant, Policy, ProtectedResource, MCPTool, Agent, User, Tenant
             db.query(AuditEvent).delete()
             db.query(DelegationGrant).delete()
             db.query(Policy).delete()
