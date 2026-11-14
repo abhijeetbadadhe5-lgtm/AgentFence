@@ -16,7 +16,7 @@ class Settings:
     
     # Server Binding
     HOST: str = os.getenv("AGENTFENCE_HOST", "127.0.0.1")
-    PORT: int = int(os.getenv("AGENTFENCE_PORT", "8000"))
+    PORT: int = int(os.getenv("AGENTFENCE_PORT", "8080"))
     DEBUG: bool = os.getenv("AGENTFENCE_DEBUG", "True").lower() == "true"
     
     # Security & Cryptography
