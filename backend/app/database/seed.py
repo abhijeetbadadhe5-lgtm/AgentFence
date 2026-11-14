@@ -6,11 +6,21 @@ from app.database.session import get_db, init_db
 from app.models.entities import Tenant, User, Agent, MCPTool, ProtectedResource, Policy, DelegationGrant
 from app.core.security import security_engine
 
-def seed_database():
+def seed_database(force: bool = False):
     init_db()
     with get_db() as db:
-        # Check if already seeded
-        if db.query(Tenant).count() > 0:
+        if force:
+            from app.models.entities import AuditEvent, DelegationGrant, Policy, ProtectedResource, MCPTool, Agent, User, Tenant
+            db.query(AuditEvent).delete()
+            db.query(DelegationGrant).delete()
+            db.query(Policy).delete()
+            db.query(ProtectedResource).delete()
+            db.query(MCPTool).delete()
+            db.query(Agent).delete()
+            db.query(User).delete()
+            db.query(Tenant).delete()
+            db.flush()
+        elif db.query(Tenant).count() > 0:
             print("Database already contains data. Skipping seed.")
             return
 
@@ -418,7 +428,7 @@ def seed_database():
             resource_restrictions=["doc_alpha_falcon", "doc_alpha_radar"],
             max_depth=3,
             current_depth=1,
-            expires_in_minutes=120
+            expires_in_minutes=525600
         )
         _, parent_payload, _ = security_engine.verify_delegation_credential(parent_token)
 
@@ -434,7 +444,7 @@ def seed_database():
             permitted_actions_json=json.dumps(["read", "search"]),
             resource_restrictions_json=json.dumps(["doc_alpha_falcon", "doc_alpha_radar"]),
             issued_at=now,
-            expires_at=now + timedelta(hours=2),
+            expires_at=now + timedelta(days=365),
             max_depth=3,
             current_depth=1,
             jti=parent_payload["jti"],
@@ -462,7 +472,7 @@ def seed_database():
             resource_restrictions=["doc_alpha_radar"],
             max_depth=3,
             current_depth=2,
-            expires_in_minutes=60
+            expires_in_minutes=525600
         )
         _, child_payload, _ = security_engine.verify_delegation_credential(child_token)
 
@@ -478,7 +488,7 @@ def seed_database():
             permitted_actions_json=json.dumps(["read"]),
             resource_restrictions_json=json.dumps(["doc_alpha_radar"]),
             issued_at=now,
-            expires_at=now + timedelta(hours=1),
+            expires_at=now + timedelta(days=365),
             max_depth=3,
             current_depth=2,
             jti=child_payload["jti"],

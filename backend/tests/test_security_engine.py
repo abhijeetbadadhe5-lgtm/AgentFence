@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 from sqlalchemy.orm import Session
 
 from app.database.session import SessionLocal, init_db
+from app.database.seed import seed_database
 from app.models.entities import Tenant, User, Agent, MCPTool, ProtectedResource, Policy, DelegationGrant, AuditEvent
 from app.core.security import security_engine
 from app.delegation.engine import delegation_engine
@@ -19,7 +20,7 @@ from app.mcp.server import mcp_protocol_handler
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_test_database():
-    init_db()
+    seed_database(force=True)
 
 @pytest.fixture
 def db():
