@@ -2,7 +2,9 @@
  * AgentFence Frontend API Client Service
  */
 
-const API_BASE = window.location.origin.includes('5173') ? 'http://127.0.0.1:8000' : '';
+const API_BASE = (typeof window !== 'undefined' && (window.location.protocol === 'file:' || window.location.port !== '8000'))
+  ? 'http://127.0.0.1:8000'
+  : '';
 
 export interface HealthStatus {
   status: string;
