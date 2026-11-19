@@ -38,7 +38,35 @@ The project explores **confused-deputy attacks**, **privilege escalation**, **cr
 ## Screenshots
 
 <!-- SCREENSHOTS_START -->
-Real screenshots have not yet been uploaded. Because the app runs on the developer's own computer at http://127.0.0.1:8080/, screenshots must be captured **locally** before they can be committed. See [Capture Real Screenshots](#capture-real-screenshots).
+> Captured from the locally running AgentFence demo. Review images for private information before committing.
+
+### Overview
+
+![AgentFence — Overview](docs/screenshots/overview.png)
+
+### Live Audit Events
+
+![AgentFence — Live Audit Events](docs/screenshots/audit-events.png)
+
+### Delegation Explorer
+
+![AgentFence — Delegation Explorer](docs/screenshots/delegations.png)
+
+### Policy Management
+
+![AgentFence — Policy Management](docs/screenshots/policies.png)
+
+### Agents & Tools
+
+![AgentFence — Agents & Tools](docs/screenshots/agents-and-tools.png)
+
+### Attack Simulation Lab
+
+![AgentFence — Attack Simulation Lab](docs/screenshots/attack-lab.png)
+
+### Tenant Management
+
+![AgentFence — Tenant Management](docs/screenshots/tenants.png)
 <!-- SCREENSHOTS_END -->
 
 ## Architecture
